@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    font-family: Inter, sana-serif;
+}
+
+html, body{ 
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 28px;
+}
+/*# sourceMappingURL=index.a1477a6c.css.map */
