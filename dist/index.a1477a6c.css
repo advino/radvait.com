@@ -14,4 +14,17 @@ html, body{
 body {
     padding: 28px;
 }
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    padding: 4px 0;
+}
+
+a {
+    color: #000;
+}
 /*# sourceMappingURL=index.a1477a6c.css.map */
