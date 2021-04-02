@@ -450,6 +450,7 @@ app.use(state);
 app.route('/', home);
 app.route('/hypercore', hypercore);
 app.route('/other', other);
+app.route('/about', about); 
 
 
 function state(state, emitter) {
@@ -481,14 +482,14 @@ function home() {
     </div>
     <div>
         <ul>
-            <li style="font-weight: 400;">Selected Works</li>
+            <li>Projects</li>
             <li>--------------</li>
             <li><a href="https://mixedsignals.studio" >Mixed Signals Studio</a></li>
             <li><a href="/hypercore">Hypercore Experiments</a></li>
             <li><a href="/other" >Other works</a></li>
         </ul>
         <ul>
-            <li style="font-weight: 400;">Links</li>
+            <li>Links</li>
             <li>--------------</li>
             <li><a href="https://are.na/advait-kalakkad/">Are.na</a></li>
             <li><a href="https://github.com/advino/">Github</a></li>
@@ -498,6 +499,9 @@ function home() {
         Designer by day ☀
         <br>
         Internet gunslinger by night ☾
+    </div>
+    <div>
+        <a href="/about">More about me</a>
     </div>
 </div>
     `
@@ -534,14 +538,21 @@ function other() {
     `
 }
 
-app.mount('div');
+function about() {
+    return html`
+        <div>
+            <div>
+                About
+            </div>
+            <div class="half">
+                Google [Current] → RISD ID [2015-2019]
+            </div>
 
-function toggleNight(e) {
-    if(e.key === 'n') {
-        console.log('n')
-        emit('toggle');
-    }
+        </div>
+    `
 }
+
+app.mount('div');
 },{"choo/html":"6rR1q","choo":"5dj5z"}],"6rR1q":[function(require,module,exports) {
 module.exports = require('nanohtml')
 

@@ -6,6 +6,7 @@ app.use(state);
 app.route('/', home);
 app.route('/hypercore', hypercore);
 app.route('/other', other);
+app.route('/about', about); 
 
 
 function state(state, emitter) {
@@ -55,6 +56,9 @@ function home() {
         <br>
         Internet gunslinger by night ☾
     </div>
+    <div>
+        <a href="/about">More about me</a>
+    </div>
 </div>
     `
 }
@@ -90,11 +94,18 @@ function other() {
     `
 }
 
-app.mount('div');
+function about() {
+    return html`
+        <div>
+            <div>
+                About
+            </div>
+            <div class="half">
+                Google [Current] → RISD ID [2015-2019]
+            </div>
 
-function toggleNight(e) {
-    if(e.key === 'n') {
-        console.log('n')
-        emit('toggle');
-    }
+        </div>
+    `
 }
+
+app.mount('div');
