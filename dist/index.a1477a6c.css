@@ -25,6 +25,28 @@ li {
 }
 
 a {
-    color: #000;
+    color: inherit;
+}
+
+.full {
+    width: 100%;
+}
+
+.half { 
+    width: 50%;
+}
+
+.quarter {
+    width: 25%;
+}
+
+.day {
+    background: #fff;
+    color: #0e0e0f; 
+}
+
+.night {
+    background-color: #0e0e0f;
+    color: #e8eaed;
 }
 /*# sourceMappingURL=index.a1477a6c.css.map */
