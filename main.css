@@ -13,6 +13,8 @@ html, body{
 
 body {
     padding: 28px;
+
+    transition: background-color .25s;
 }
 
 ul {

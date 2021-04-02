@@ -14,17 +14,21 @@ function state(state, emitter) {
         emitter.on('toggle', data => {
             if(data == 'n') {
                 state.nightmode = !state.nightmode;
-                console.log(state.nightmode);
+                document.body.className = state.nightmode ? "night" : "day";
             }
 
             emitter.emit('render');
-        })
+        });
+
+        window.addEventListener('keypress', e => {
+            emitter.emit('toggle', e.key);
+        });
     })
 }
 
-function home(state, emit) {
+function home() {
     return html`
-    <body onkeypress="${e => { emit('toggle', e.key)} }" class="${state.nightmode ? "night" : "day"}">
+    <div clas="full">
     <div>
         Advait Kalakkad
         <div style="opacity: .8;">
@@ -51,13 +55,13 @@ function home(state, emit) {
         <br>
         Internet gunslinger by night ☾
     </div>
-</body>
+</div>
     `
 }
 
 function hypercore() {
     return html`
-        <body>
+        <div>
             <div>
                 Hypercore Experiements
             </div>
@@ -65,14 +69,14 @@ function hypercore() {
                 In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
             </div>
 
-        </body>
+        </div>
 
     `
 }
 
 function other() {
     return html`
-        <body>
+        <div>
             <div>
                 Other works
             </div>
@@ -82,11 +86,11 @@ function other() {
                     <li>Text2UI</li>
                 </ul>
             </div>
-        </body>
+        </div>
     `
 }
 
-app.mount('body');
+app.mount('div');
 
 function toggleNight(e) {
     if(e.key === 'n') {
@@ -94,9 +98,3 @@ function toggleNight(e) {
         emit('toggle');
     }
 }
-
-// window.addEventListener('keypress', e => {
-//     if(e.key === 'n') {
-//         emit('toggle');
-//     }
-// })
