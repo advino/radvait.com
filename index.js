@@ -37,14 +37,14 @@ function home() {
     </div>
     <div>
         <ul>
-            <li style="font-weight: 400;">Selected Works</li>
+            <li>Projects</li>
             <li>--------------</li>
             <li><a href="https://mixedsignals.studio" >Mixed Signals Studio</a></li>
             <li><a href="/hypercore">Hypercore Experiments</a></li>
             <li><a href="/other" >Other works</a></li>
         </ul>
         <ul>
-            <li style="font-weight: 400;">Links</li>
+            <li>Links</li>
             <li>--------------</li>
             <li><a href="https://are.na/advait-kalakkad/">Are.na</a></li>
             <li><a href="https://github.com/advino/">Github</a></li>
