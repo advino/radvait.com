@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: Inter, sana-serif;
+    font-family: Inter, san-serif;
 }
 
 html, body{ 
@@ -12,8 +12,7 @@ html, body{
 }
 
 body {
-    padding: 28px;
-
+    padding: 40px;
     transition: background-color .25s;
 }
 
@@ -30,7 +29,15 @@ a {
     color: inherit;
 }
 
+.max {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+}
+
 .full {
+    position: relative;
     width: 100%;
 }
 
@@ -50,5 +57,31 @@ a {
 .night {
     background-color: #0e0e0f;
     color: #e8eaed;
+}
+
+
+.subtitle {
+    opacity: .6;
+}
+
+.toolbar {
+    position: absolute;
+
+    width: 100%;
+    min-height: 90px;
+    background-color: #c9c9c9;
+    border-radius: 16px;
+
+    transition: bottom .15s, opacity .15s;
+}
+
+.tool-passive {
+    bottom: -12px;
+    opacity: 0;
+}
+
+.tool-active {
+    bottom: 0;
+    opacity: 1.0;
 }
 /*# sourceMappingURL=index.a1477a6c.css.map */

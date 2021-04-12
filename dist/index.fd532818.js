@@ -444,6 +444,8 @@ id) /*: string*/
 },{}],"4ee1I":[function(require,module,exports) {
 let html = require('choo/html');
 let choo = require('choo');
+let Toolbar = require('./components/Toolbar.js');
+
 
 let app = choo();
 app.use(state);
@@ -453,13 +455,22 @@ app.route('/other', other);
 app.route('/about', about); 
 
 
+let toolbar = new Toolbar();
+
 function state(state, emitter) {
     state.nightmode = false;
+    state.toolbar = false  ;
     emitter.on('DOMContentLoaded', () => {
         emitter.on('toggle', data => {
             if(data == 'n') {
                 state.nightmode = !state.nightmode;
                 document.body.className = state.nightmode ? "night" : "day";
+            }
+
+            if(data == '/') {
+                state.toolbar = !state.toolbar;
+                console.log("Current tool state", state.toolbar);
+                toolbar.render(state.toolbar);
             }
 
             emitter.emit('render');
@@ -473,10 +484,10 @@ function state(state, emitter) {
 
 function home() {
     return html`
-    <div clas="full">
+    <div class="max">
     <div>
         Advait Kalakkad
-        <div style="opacity: .8;">
+        <div class="subtitle">
             Designer
         </div>
     </div>
@@ -503,6 +514,8 @@ function home() {
     <div>
         <a href="/about">More about me</a>
     </div>
+
+    ${toolbar.render(state.toolbar)}
 </div>
     `
 }
@@ -512,6 +525,9 @@ function hypercore() {
         <div>
             <div>
                 Hypercore Experiements
+            <div class="subtitle">
+                Code Snippets & Prototypes
+            </div>
             </div>
             <div class="half">
                 In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
@@ -553,7 +569,7 @@ function about() {
 }
 
 app.mount('div');
-},{"choo/html":"6rR1q","choo":"5dj5z"}],"6rR1q":[function(require,module,exports) {
+},{"choo/html":"6rR1q","choo":"5dj5z","./components/Toolbar.js":"7aKm4"}],"6rR1q":[function(require,module,exports) {
 module.exports = require('nanohtml')
 
 },{"nanohtml":"4Xdnk"}],"4Xdnk":[function(require,module,exports) {
@@ -2750,6 +2766,324 @@ LRU.prototype.evict = function () {
   if (!this.tail) return
   this.remove(this.tail)
 }
+
+},{}],"7aKm4":[function(require,module,exports) {
+const Nanocomponent = require('nanocomponent');
+let html = require('nanohtml');
+
+class Toolbar extends Nanocomponent {
+    constructor() {
+        super();
+        this.active = false;
+    }
+
+    createElement(active) {
+        this.active = active;
+        return html`
+            <div class="toolbar ${this.active ? "tool-active" : "tool-passive"}">
+
+            </div>
+        `
+    }
+
+    update(active) {
+        console.log("new active", active);
+        console.log("current active", this.active);
+        return active !== this.active;
+    }
+}
+
+module.exports = Toolbar;
+},{"nanocomponent":"1iW7w","nanohtml":"4Xdnk"}],"1iW7w":[function(require,module,exports) {
+var document = require('global/document')
+var nanotiming = require('nanotiming')
+var morph = require('nanomorph')
+var onload = require('on-load')
+var OL_KEY_ID = onload.KEY_ID
+var OL_ATTR_ID = onload.KEY_ATTR
+var assert = require('assert')
+
+module.exports = Nanocomponent
+
+function makeID () {
+  return 'ncid-' + Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
+}
+
+function Nanocomponent (name) {
+  this._hasWindow = typeof window !== 'undefined'
+  this._id = null // represents the id of the root node
+  this._ncID = null // internal nanocomponent id
+  this._olID = null
+  this._proxy = null
+  this._loaded = false // Used to debounce on-load when child-reordering
+  this._rootNodeName = null
+  this._name = name || 'nanocomponent'
+  this._rerender = false
+
+  this._handleLoad = this._handleLoad.bind(this)
+  this._handleUnload = this._handleUnload.bind(this)
+
+  this._arguments = []
+
+  var self = this
+
+  Object.defineProperty(this, 'element', {
+    get: function () {
+      var el = document.getElementById(self._id)
+      if (el) return el.dataset.nanocomponent === self._ncID ? el : undefined
+    }
+  })
+}
+
+Nanocomponent.prototype.render = function () {
+  var renderTiming = nanotiming(this._name + '.render')
+  var self = this
+  var args = new Array(arguments.length)
+  var el
+  for (var i = 0; i < arguments.length; i++) args[i] = arguments[i]
+  if (!this._hasWindow) {
+    var createTiming = nanotiming(this._name + '.create')
+    el = this.createElement.apply(this, args)
+    createTiming()
+    renderTiming()
+    return el
+  } else if (this.element) {
+    el = this.element // retain reference, as the ID might change on render
+    var updateTiming = nanotiming(this._name + '.update')
+    var shouldUpdate = this._rerender || this.update.apply(this, args)
+    updateTiming()
+    if (this._rerender) this._rerender = false
+    if (shouldUpdate) {
+      var desiredHtml = this._handleRender(args)
+      var morphTiming = nanotiming(this._name + '.morph')
+      morph(el, desiredHtml)
+      morphTiming()
+      if (this.afterupdate) this.afterupdate(el)
+    }
+    if (!this._proxy) { this._proxy = this._createProxy() }
+    renderTiming()
+    return this._proxy
+  } else {
+    this._reset()
+    el = this._handleRender(args)
+    if (this.beforerender) this.beforerender(el)
+    if (this.load || this.unload || this.afterreorder) {
+      onload(el, self._handleLoad, self._handleUnload, self._ncID)
+      this._olID = el.dataset[OL_KEY_ID]
+    }
+    renderTiming()
+    return el
+  }
+}
+
+Nanocomponent.prototype.rerender = function () {
+  assert(this.element, 'nanocomponent: cant rerender on an unmounted dom node')
+  this._rerender = true
+  this.render.apply(this, this._arguments)
+}
+
+Nanocomponent.prototype._handleRender = function (args) {
+  var createElementTiming = nanotiming(this._name + '.createElement')
+  var el = this.createElement.apply(this, args)
+  createElementTiming()
+  if (!this._rootNodeName) this._rootNodeName = el.nodeName
+  assert(el instanceof window.Element, 'nanocomponent: createElement should return a single DOM node')
+  assert.equal(this._rootNodeName, el.nodeName, 'nanocomponent: root node types cannot differ between re-renders')
+  this._arguments = args
+  return this._brandNode(this._ensureID(el))
+}
+
+Nanocomponent.prototype._createProxy = function () {
+  var proxy = document.createElement(this._rootNodeName)
+  var self = this
+  this._brandNode(proxy)
+  proxy.id = this._id
+  proxy.setAttribute('data-proxy', '')
+  proxy.isSameNode = function (el) {
+    return (el && el.dataset.nanocomponent === self._ncID)
+  }
+  return proxy
+}
+
+Nanocomponent.prototype._reset = function () {
+  this._ncID = makeID()
+  this._olID = null
+  this._id = null
+  this._proxy = null
+  this._rootNodeName = null
+}
+
+Nanocomponent.prototype._brandNode = function (node) {
+  node.setAttribute('data-nanocomponent', this._ncID)
+  if (this._olID) node.setAttribute(OL_ATTR_ID, this._olID)
+  return node
+}
+
+Nanocomponent.prototype._ensureID = function (node) {
+  if (node.id) this._id = node.id
+  else node.id = this._id = this._ncID
+  // Update proxy node ID if it changed
+  if (this._proxy && this._proxy.id !== this._id) this._proxy.id = this._id
+  return node
+}
+
+Nanocomponent.prototype._handleLoad = function (el) {
+  if (this._loaded) {
+    if (this.afterreorder) this.afterreorder(el)
+    return // Debounce child-reorders
+  }
+  this._loaded = true
+  if (this.load) this.load(el)
+}
+
+Nanocomponent.prototype._handleUnload = function (el) {
+  if (this.element) return // Debounce child-reorders
+  this._loaded = false
+  if (this.unload) this.unload(el)
+}
+
+Nanocomponent.prototype.createElement = function () {
+  throw new Error('nanocomponent: createElement should be implemented!')
+}
+
+Nanocomponent.prototype.update = function () {
+  throw new Error('nanocomponent: update should be implemented!')
+}
+
+},{"global/document":"1v5Tk","nanotiming":"4Qupd","nanomorph":"2rLkr","on-load":"CJomz","assert":"59vzB"}],"1v5Tk":[function(require,module,exports) {
+var global = arguments[3];
+var topLevel = typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : {};
+var minDoc = require('min-document');
+var doccy;
+if (typeof document !== 'undefined') {
+  doccy = document;
+} else {
+  doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
+  if (!doccy) {
+    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
+  }
+}
+module.exports = doccy;
+
+},{"min-document":"3ltS3"}],"3ltS3":[function(require,module,exports) {
+"use strict";
+},{}],"CJomz":[function(require,module,exports) {
+/* global MutationObserver */
+var document = require('global/document')
+var window = require('global/window')
+var assert = require('assert')
+var watch = Object.create(null)
+var KEY_ID = 'onloadid' + (new Date() % 9e6).toString(36)
+var KEY_ATTR = 'data-' + KEY_ID
+var INDEX = 0
+
+if (window && window.MutationObserver) {
+  var observer = new MutationObserver(function (mutations) {
+    if (Object.keys(watch).length < 1) return
+    for (var i = 0; i < mutations.length; i++) {
+      if (mutations[i].attributeName === KEY_ATTR) {
+        eachAttr(mutations[i], turnon, turnoff)
+        continue
+      }
+      eachMutation(mutations[i].removedNodes, turnoff)
+      eachMutation(mutations[i].addedNodes, turnon)
+    }
+  })
+  if (document.body) {
+    beginObserve(observer)
+  } else {
+    document.addEventListener('DOMContentLoaded', function (event) {
+      beginObserve(observer)
+    })
+  }
+}
+
+function beginObserve (observer) {
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeOldValue: true,
+    attributeFilter: [KEY_ATTR]
+  })
+}
+
+module.exports = function onload (el, on, off, caller) {
+  assert(document.body, 'on-load: will not work prior to DOMContentLoaded')
+  on = on || function () {}
+  off = off || function () {}
+  el.setAttribute(KEY_ATTR, 'o' + INDEX)
+  watch['o' + INDEX] = [on, off, 0, caller || onload.caller]
+  INDEX += 1
+  return el
+}
+
+module.exports.KEY_ATTR = KEY_ATTR
+module.exports.KEY_ID = KEY_ID
+
+function turnon (index, el) {
+  if (watch[index][0] && watch[index][2] === 0) {
+    watch[index][0](el)
+    watch[index][2] = 1
+  }
+}
+
+function turnoff (index, el) {
+  if (watch[index][1] && watch[index][2] === 1) {
+    watch[index][1](el)
+    watch[index][2] = 0
+  }
+}
+
+function eachAttr (mutation, on, off) {
+  var newValue = mutation.target.getAttribute(KEY_ATTR)
+  if (sameOrigin(mutation.oldValue, newValue)) {
+    watch[newValue] = watch[mutation.oldValue]
+    return
+  }
+  if (watch[mutation.oldValue]) {
+    off(mutation.oldValue, mutation.target)
+  }
+  if (watch[newValue]) {
+    on(newValue, mutation.target)
+  }
+}
+
+function sameOrigin (oldValue, newValue) {
+  if (!oldValue || !newValue) return false
+  return watch[oldValue][3] === watch[newValue][3]
+}
+
+function eachMutation (nodes, fn) {
+  var keys = Object.keys(watch)
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i] && nodes[i].getAttribute && nodes[i].getAttribute(KEY_ATTR)) {
+      var onloadid = nodes[i].getAttribute(KEY_ATTR)
+      keys.forEach(function (k) {
+        if (onloadid === k) {
+          fn(k, nodes[i])
+        }
+      })
+    }
+    if (nodes[i].childNodes.length > 0) {
+      eachMutation(nodes[i].childNodes, fn)
+    }
+  }
+}
+
+},{"global/document":"1v5Tk","global/window":"3gTwh","assert":"59vzB"}],"3gTwh":[function(require,module,exports) {
+var global = arguments[3];
+var win;
+if (typeof window !== "undefined") {
+  win = window;
+} else if (typeof global !== "undefined") {
+  win = global;
+} else if (typeof self !== "undefined") {
+  win = self;
+} else {
+  win = {};
+}
+module.exports = win;
 
 },{}]},["A7H4y","4ee1I"], "4ee1I", "parcelRequired4a0")
 

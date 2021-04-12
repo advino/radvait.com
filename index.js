@@ -1,5 +1,7 @@
 let html = require('choo/html');
 let choo = require('choo');
+let Toolbar = require('./components/Toolbar.js');
+
 
 let app = choo();
 app.use(state);
@@ -9,13 +11,22 @@ app.route('/other', other);
 app.route('/about', about); 
 
 
+let toolbar = new Toolbar();
+
 function state(state, emitter) {
     state.nightmode = false;
+    state.toolbar = false  ;
     emitter.on('DOMContentLoaded', () => {
         emitter.on('toggle', data => {
             if(data == 'n') {
                 state.nightmode = !state.nightmode;
                 document.body.className = state.nightmode ? "night" : "day";
+            }
+
+            if(data == '/') {
+                state.toolbar = !state.toolbar;
+                console.log("Current tool state", state.toolbar);
+                toolbar.render(state.toolbar);
             }
 
             emitter.emit('render');
@@ -29,10 +40,10 @@ function state(state, emitter) {
 
 function home() {
     return html`
-    <div clas="full">
+    <div class="max">
     <div>
         Advait Kalakkad
-        <div style="opacity: .8;">
+        <div class="subtitle">
             Designer
         </div>
     </div>
@@ -59,6 +70,8 @@ function home() {
     <div>
         <a href="/about">More about me</a>
     </div>
+
+    ${toolbar.render(state.toolbar)}
 </div>
     `
 }
@@ -68,6 +81,9 @@ function hypercore() {
         <div>
             <div>
                 Hypercore Experiements
+            <div class="subtitle">
+                Code Snippets & Prototypes
+            </div>
             </div>
             <div class="half">
                 In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
