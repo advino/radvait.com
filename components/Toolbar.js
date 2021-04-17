@@ -4,22 +4,22 @@ let html = require('nanohtml');
 class Toolbar extends Nanocomponent {
     constructor() {
         super();
-        this.active = false;
+        this.active = null;
     }
 
     createElement(active) {
+        console.log(active);
         this.active = active;
+        let c = active ? "tool-active" : "tool-passive" 
         return html`
-            <div class="toolbar ${this.active ? "tool-active" : "tool-passive"}">
+            <div class="toolbar ${c}">
 
             </div>
         `
     }
 
     update(active) {
-        console.log("new active", active);
-        console.log("current active", this.active);
-        return active !== this.active;
+        return this.active !== active;
     }
 }
 

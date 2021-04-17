@@ -10,23 +10,14 @@ app.route('/hypercore', hypercore);
 app.route('/other', other);
 app.route('/about', about); 
 
-
-let toolbar = new Toolbar();
-
 function state(state, emitter) {
+    state.toolbar = true;
     state.nightmode = false;
-    state.toolbar = false  ;
     emitter.on('DOMContentLoaded', () => {
         emitter.on('toggle', data => {
             if(data == 'n') {
                 state.nightmode = !state.nightmode;
                 document.body.className = state.nightmode ? "night" : "day";
-            }
-
-            if(data == '/') {
-                state.toolbar = !state.toolbar;
-                console.log("Current tool state", state.toolbar);
-                toolbar.render(state.toolbar);
             }
 
             emitter.emit('render');
@@ -44,7 +35,7 @@ function home() {
     <div>
         Advait Kalakkad
         <div class="subtitle">
-            Designer
+            Designer + Technologist
         </div>
     </div>
     <div>
@@ -67,11 +58,11 @@ function home() {
         <br>
         Internet gunslinger by night ☾
     </div>
+    <br>
     <div>
         <a href="/about">More about me</a>
     </div>
 
-    ${toolbar.render(state.toolbar)}
 </div>
     `
 }
@@ -80,7 +71,7 @@ function hypercore() {
     return html`
         <div>
             <div>
-                Hypercore Experiements
+            <a href="/"> ← </a> Hypercore Experiements
             <div class="subtitle">
                 Code Snippets & Prototypes
             </div>
@@ -98,12 +89,15 @@ function other() {
     return html`
         <div>
             <div>
-                Other works
+            <a href="/"> ← </a> Other works
             </div>
             <div>
+                <br>
+                Things I've built, random ideas, works-in-progess??
                 <ul>
-                    <li>Album Artwork Recommender</li>
-                    <li>Text2UI</li>
+                    <li><a href="https://github.com/advino/arena-blog">Arena Blog</a></li>
+                    <li><a href="https://github.com/advino/album-art-recommendation">Album Artwork Recommender</a></li>
+                    <li><a href="https://github.com/advino/text2UI">Text2UI</a></li>
                 </ul>
             </div>
         </div>
@@ -114,10 +108,23 @@ function about() {
     return html`
         <div>
             <div>
-                About
+                <a href="/"> ← </a> About
             </div>
             <div class="half">
                 Google [Current] → RISD ID [2015-2019]
+                <div>
+                <br>
+                    Hit me up if you're trying to build cool shit. 
+                    <br>
+                    I offer development, prototyping, and consulting services on the following
+                    <ul>
+                        <li>Front-end dev</li>
+                        <li>Physical Computing</li>
+                        <li>Networked objects</li>
+                    </ul>
+
+                    Contact me at advait.kalakkad@gmail.com
+                </div>
             </div>
 
         </div>
