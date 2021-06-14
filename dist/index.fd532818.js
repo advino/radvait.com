@@ -445,23 +445,33 @@ id) /*: string*/
 let html = require('choo/html');
 let choo = require('choo');
 let Toolbar = require('./components/Toolbar.js');
+let BackButton = require('./components/BackButton.js');
 
 
 let app = choo();
 app.use(state);
 app.route('/', home);
 app.route('/hypercore', hypercore);
-app.route('/other', other);
-app.route('/about', about); 
+app.route('/sandbox', sandbox);
+app.route('/about', about);
+app.route('/groupdraw', groupdraw);
+
+
+let toolbar = new Toolbar();
+let backButton = new BackButton();
 
 function state(state, emitter) {
-    state.toolbar = true;
+    state.toolbar = false;
     state.nightmode = false;
     emitter.on('DOMContentLoaded', () => {
         emitter.on('toggle', data => {
-            if(data == 'n') {
+            if (data == 'n') {
                 state.nightmode = !state.nightmode;
                 document.body.className = state.nightmode ? "night" : "day";
+            }
+
+            if (data == '?') {
+                state.toolbar = !state.toolbar;
             }
 
             emitter.emit('render');
@@ -476,73 +486,130 @@ function state(state, emitter) {
 function home() {
     return html`
     <div class="max">
-    <div>
-        Advait Kalakkad
+    <div class="header">
+        <div class="title">
+            Advait Kalakkad
+        </div>
         <div class="subtitle">
-            Designer + Technologist
+            Designer & Technologist
         </div>
     </div>
-    <div>
+
+    <div class="quarter">
         <ul>
-            <li>Projects</li>
+            <li>Selected Works</li>
             <li>--------------</li>
-            <li><a href="https://mixedsignals.studio" >Mixed Signals Studio</a></li>
+            <li><a href="/groupdraw">Groupdraw</a></li>
+            <li><a href="https://mixedsignals.studio" >Mixed Signals Studio <span class="nearrow"></span></a></li>
             <li><a href="/hypercore">Hypercore Experiments</a></li>
-            <li><a href="/other" >Other works</a></li>
+            <li><a href="/sandbox">Sandbox</a></li>
         </ul>
         <ul>
             <li>Links</li>
             <li>--------------</li>
-            <li><a href="https://are.na/advait-kalakkad/">Are.na</a></li>
-            <li><a href="https://github.com/advino/">Github</a></li>
+            <li><a href="/about">Bio</a></li>
+            <li><a href="https://are.na/advait-kalakkad/">Are.na <span class="nearrow"></span></a></li>
+            <li><a href="https://github.com/advino/">Github <span class="nearrow"></span></a></li>
         </ul>
     </div>
-    <div>
-        Designer by day ☀
-        <br>
-        Internet gunslinger by night ☾
-    </div>
-    <br>
-    <div>
-        <a href="/about">More about me</a>
-    </div>
 
-</div>
+    ${toolbar.render(this.state.toolbar)}
+        
+    </div>
     `
 }
 
-function hypercore() {
+function groupdraw() {
     return html`
-        <div>
-            <div>
-            <a href="/"> ← </a> Hypercore Experiements
-            <div class="subtitle">
-                Code Snippets & Prototypes
-            </div>
-            </div>
-            <div class="half">
-                In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
+        <div class="detail-page max">
+
+            <div class="quarter">
+                ${backButton.render()}
+                <div class="header">
+                    <div class="title">
+                        Groupdraw
+                    </div>
+                    <div class="subtitle">
+                        Simple, Shared, Software
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text">
+                    Groupdraw is a small experiment in shared-ownership. 
+                    <br>
+                    <br>
+                    Most software today operates on an <i>all in one</i> modality where users have complete access to all functionality from the start. Groupdraw seeks to question this through the means of a browser-based drawing board.
+                    <br>
+                    <br>
+                    Groupdraw restricts certain tools based on how many additional users there are sharing the network. A certain number of users must be 'seeding' or supporting the network in order for the tool to have certain functionality.
+                    <br>
+                    <br>
+                    What if a tool's effectiveness was a function of the level of attention and support it received?
+                    </span>
+                </div>
             </div>
 
+            <div class="threequarter documentation">
+            
+            </div>
+        </div>
+    `
+}
+
+
+function hypercore() {
+    return html`
+        <div class="detail-page max">
+
+            <div class="quarter">
+                ${backButton.render()}
+                <div class="header">
+
+                    <div class="title">
+                        Hypercore Experiements
+                    </div>
+                    <div class="subtitle">
+                        Code Snippets & Prototypes
+                    </div>
+                </div>
+                <div>
+                    <span class="text">
+                        In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
+                    </span>
+                </div>
+            </div>
+
+            <div class="threequarter documentation">
+
+            </div>
         </div>
 
     `
 }
 
-function other() {
+function sandbox() {
     return html`
-        <div>
-            <div>
-            <a href="/"> ← </a> Other works
-            </div>
-            <div>
-                <br>
-                Things I've built, random ideas, works-in-progess??
-                <ul>
-                    <li><a href="https://github.com/advino/arena-blog">Arena Blog</a></li>
-                    <li><a href="https://github.com/advino/album-art-recommendation">Album Artwork Recommender</a></li>
-                    <li><a href="https://github.com/advino/text2UI">Text2UI</a></li>
-                </ul>
+        <div class="detail-page">
+            <div class="quarter">
+                ${backButton.render()}
+
+                <div class="header">
+                    <div class="title">
+                        Sandbox
+                    </div>
+                    <div class="subtitle">
+                        Projects in progress, prototypes, & more?????
+                    </div>
+                </div>
+                
+                <div>
+                    <ul>
+                        <li><a href="https://github.com/advino/arena-blog">Arena Blog</a></li>
+                        <li><a href="https://github.com/advino/album-art-recommendation">Album Artwork Recommender</a></li>
+                        <li><a href="https://github.com/advino/text2UI">Text2UI</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     `
@@ -550,24 +617,23 @@ function other() {
 
 function about() {
     return html`
-        <div>
-            <div>
-                <a href="/"> ← </a> About
-            </div>
-            <div class="half">
-                Google [Current] → RISD ID [2015-2019]
-                <div>
-                <br>
-                    Hit me up if you're trying to build cool shit. 
-                    <br>
-                    I offer development, prototyping, and consulting services on the following
-                    <ul>
-                        <li>Front-end dev</li>
-                        <li>Physical Computing</li>
-                        <li>Networked objects</li>
-                    </ul>
+        <div class="detail-page">
+            <div class="quarter">
+                ${backButton.render()}
 
-                    Contact me at advait.kalakkad@gmail.com
+                <div class="header">
+                    <div class="title">
+                        About
+                    </div>
+                    <div class="subtitle">
+                        Internet gunslinger
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text">2019 ${"->"} Google  </span>
+                    <br>
+                    <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
                 </div>
             </div>
 
@@ -576,7 +642,9 @@ function about() {
 }
 
 app.mount('div');
-},{"choo/html":"6rR1q","choo":"5dj5z","./components/Toolbar.js":"7aKm4"}],"6rR1q":[function(require,module,exports) {
+
+
+},{"choo/html":"6rR1q","choo":"5dj5z","./components/Toolbar.js":"7aKm4","./components/BackButton.js":"4vTSy"}],"6rR1q":[function(require,module,exports) {
 module.exports = require('nanohtml')
 
 },{"nanohtml":"4Xdnk"}],"4Xdnk":[function(require,module,exports) {
@@ -2785,12 +2853,34 @@ class Toolbar extends Nanocomponent {
     }
 
     createElement(active) {
-        console.log(active);
         this.active = active;
-        let c = active ? "tool-active" : "tool-passive" 
+        let c = this.active ? "tool-active" : "tool-passive" 
         return html`
             <div class="toolbar ${c}">
-
+            <div style="display:flex; gap: 4px; flex-direction: column;">
+                <div class="tool">
+                    N
+                </div>
+                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                    NIGHT
+                </div>
+            </div>
+            <div style="display:flex; gap: 4px;  flex-direction: column;">
+                <div class="tool">
+                    ?
+                </div>
+                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                    TOOLS
+                </div>
+            </div>
+            <div style="display:flex; gap: 4px;  flex-direction: column;">
+                <div class="tool">
+                    C
+                </div>
+                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                    CLOCK
+                </div>
+            </div>
             </div>
         `
     }
@@ -3092,6 +3182,29 @@ if (typeof window !== "undefined") {
 }
 module.exports = win;
 
-},{}]},["A7H4y","4ee1I"], "4ee1I", "parcelRequired4a0")
+},{}],"4vTSy":[function(require,module,exports) {
+const Nanocomponent = require('nanocomponent');
+let html = require('nanohtml');
+
+class BackButton extends Nanocomponent {
+
+    constructor() {
+        super();
+    }
+
+    createElement() {
+        return html`
+            <a class="back-nav" href="/"> ${"<-"} BACK</a>
+        `
+    }
+
+    update() {
+        return false;
+    }
+}
+
+module.exports = BackButton;
+
+},{"nanocomponent":"1iW7w","nanohtml":"4Xdnk"}]},["A7H4y","4ee1I"], "4ee1I", "parcelRequired4a0")
 
 //# sourceMappingURL=index.fd532818.js.map
