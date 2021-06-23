@@ -114,6 +114,12 @@ a {
 /* Project Documentation */
 
 .documentation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 56px;
+
     background-color: #bfffe6;
     border-radius: 12px;
 }
@@ -137,6 +143,9 @@ a {
     font-family: Inter;
 }
 
+.documentation-image {
+    width: 100%;
+}
 
 /* Tool Component */
 

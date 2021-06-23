@@ -447,7 +447,6 @@ let choo = require('choo');
 let Toolbar = require('./components/Toolbar.js');
 let BackButton = require('./components/BackButton.js');
 
-
 let app = choo();
 app.use(state);
 app.route('/', home);
@@ -459,6 +458,9 @@ app.route('/groupdraw', groupdraw);
 
 let toolbar = new Toolbar();
 let backButton = new BackButton();
+
+let groupDrawImages = require('url:/assets/groupdraw/ui.png'); 
+
 
 function state(state, emitter) {
     state.toolbar = false;
@@ -551,7 +553,7 @@ function groupdraw() {
             </div>
 
             <div class="threequarter documentation">
-            
+                <img class="documentation-image" src="${groupDrawImages}">
             </div>
         </div>
     `
@@ -626,7 +628,7 @@ function about() {
                         About
                     </div>
                     <div class="subtitle">
-                        Internet gunslinger
+                        Internet gunslinger. 
                     </div>
                 </div>
 
@@ -644,7 +646,7 @@ function about() {
 app.mount('div');
 
 
-},{"choo/html":"6rR1q","choo":"5dj5z","./components/Toolbar.js":"7aKm4","./components/BackButton.js":"4vTSy"}],"6rR1q":[function(require,module,exports) {
+},{"choo/html":"6rR1q","choo":"5dj5z","./components/Toolbar.js":"7aKm4","./components/BackButton.js":"4vTSy","url:/assets/groupdraw/ui.png":"2Nvsn"}],"6rR1q":[function(require,module,exports) {
 module.exports = require('nanohtml')
 
 },{"nanohtml":"4Xdnk"}],"4Xdnk":[function(require,module,exports) {
@@ -3205,6 +3207,54 @@ class BackButton extends Nanocomponent {
 
 module.exports = BackButton;
 
-},{"nanocomponent":"1iW7w","nanohtml":"4Xdnk"}]},["A7H4y","4ee1I"], "4ee1I", "parcelRequired4a0")
+},{"nanocomponent":"1iW7w","nanohtml":"4Xdnk"}],"2Nvsn":[function(require,module,exports) {
+module.exports = require('./bundle-url').getBundleURL() + "ui.7f20cdfc.png"
+},{"./bundle-url":"7ESFr"}],"7ESFr":[function(require,module,exports) {
+"use strict";
+
+/* globals document:readonly */
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+
+
+function getOrigin(url) {
+  let matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+
+  if (!matches) {
+    throw new Error('Origin not found');
+  }
+
+  return matches[0];
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+},{}]},["A7H4y","4ee1I"], "4ee1I", "parcelRequired4a0")
 
 //# sourceMappingURL=index.fd532818.js.map

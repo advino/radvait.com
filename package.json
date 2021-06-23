@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "choo": "^7.1.0"
+    "choo": "^7.1.0",
+    "nanohtml": "^1.9.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0-beta.2"
   }
 }
