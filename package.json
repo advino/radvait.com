@@ -2,10 +2,10 @@
   "name": "adv",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel index.html"
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,7 @@
     "nanohtml": "^1.9.1"
   },
   "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-beta.3.1",
-    "parcel": "^2.0.0-beta.3.1"
+    "@parcel/transformer-image": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.2"
   }
 }
