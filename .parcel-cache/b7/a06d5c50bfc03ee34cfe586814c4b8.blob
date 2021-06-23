@@ -1,1 +1,0 @@
-module.exports = require('./bundle-url').getBundleURL() + "ui.HASH_REF_5c483090e1c56bb59f47e0de7f20cdfc.png"
