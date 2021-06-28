@@ -194,5 +194,15 @@ a {
 }
 
 
+.badge {
+    width: fit-content;
+    height: auto;
+    padding: 2px 4px;
 
+    font-size: 12px;
+    color: #e8eaed;
+
+    background-color: #ed3d66;
+    border-radius: 100px;
+}
 

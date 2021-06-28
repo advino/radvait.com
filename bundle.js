@@ -121,8 +121,8 @@ function home() {
     return html`
     <div class="max">
     <div class="header">
-        <div class="title">
-            Advait Kalakkad
+        <div class="title" style="display:flex; align-items:center; gap: 12px;">
+            <span>Advait Kalakkad</span> <span class="badge">SITE WIP</span>
         </div>
         <div class="subtitle">
             Designer & Technologist
