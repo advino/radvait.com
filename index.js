@@ -15,7 +15,8 @@ app.route('/groupdraw', groupdraw);
 let toolbar = new Toolbar();
 let backButton = new BackButton();
 
-let groupDrawImages = require('url:/assets/groupdraw/ui.png'); 
+// No longer needed since compiling with Browserify
+// let groupDrawImages = require('url:/assets/groupdraw/ui.png'); 
 
 
 function state(state, emitter) {
@@ -109,7 +110,7 @@ function groupdraw() {
             </div>
 
             <div class="threequarter documentation">
-                <img class="documentation-image" src="${groupDrawImages}">
+                <img class="documentation-image" src="./assets/groupdraw/ui.png">
             </div>
         </div>
     `
