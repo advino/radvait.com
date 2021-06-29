@@ -197,9 +197,11 @@ a {
 .badge {
     width: fit-content;
     height: auto;
-    padding: 2px 4px;
+    padding: 2px 8px;
 
     font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .6px;
     color: #e8eaed;
 
     background-color: #ed3d66;
