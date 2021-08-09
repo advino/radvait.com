@@ -66,7 +66,7 @@ function home() {
         <ul>
             <li>Links</li>
             <li>--------------</li>
-            <li><a href="/about">Bio</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="https://are.na/advait-kalakkad/">Are.na <span class="nearrow"></span></a></li>
             <li><a href="https://github.com/advino/">Github <span class="nearrow"></span></a></li>
         </ul>
@@ -176,7 +176,7 @@ function sandbox() {
 
 function about() {
     return html`
-        <div class="detail-page">
+        <div class="detail-page max">
             <div class="quarter">
                 ${backButton.render()}
 
@@ -203,6 +203,11 @@ function about() {
                     <br>
                     <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
                 </div>
+            </div>
+
+            <div class="threequarter documentation">
+                <img class="prof-image" src="./assets/bio/prof.png">
+
             </div>
         </div>
     `
