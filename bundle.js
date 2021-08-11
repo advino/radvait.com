@@ -266,7 +266,7 @@ function about() {
 
                 <div>
                     <span class="text">
-                        Currently designing and building peer-to-peer objects & software. Researching connected objects, daemons, and agents that collect, maintain, and repair. Believer of the crossing of <a href="https://youtube.com/clip/UgzqNF4tAyUaxZUlpiV4AaABCQ">smart and stupid</a>.
+                        I design TV & Media experiences at Google. In my personal time I have been creating peer-to-peer applications, sharping my visual design skills, and occasionally writing code for other friends projects. I am a firm believer of the crossing of <a href="https://youtube.com/clip/UgzqNF4tAyUaxZUlpiV4AaABCQ">smart and stupid</a>.
                     </span>
                 </div>
 
@@ -274,7 +274,7 @@ function about() {
                     <span class="text">A Brief History</span>
                     <br>
                     <br>
-                    <span class="text">2019 ${"->"} Google  </span>
+                    <span class="text">2019 ${"->"} Google TV </span>
                     <br>
                     <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
                 </div>
