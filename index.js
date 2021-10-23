@@ -195,10 +195,11 @@ function about() {
                     </span>
                 </div>
 
+                <div class="header">
+                    <div class="title">Experience</div>
+                    <div class="subtitle">A brief history</div>
+                </div>
                 <div>
-                    <span class="text">A Brief History</span>
-                    <br>
-                    <br>
                     <span class="text">2019 ${"->"} Google TV </span>
                     <br>
                     <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
