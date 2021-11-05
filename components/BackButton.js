@@ -9,7 +9,7 @@ class BackButton extends Nanocomponent {
 
     createElement() {
         return html`
-            <a class="back-nav" href="/"> ${"<-"} BACK</a>
+            <a class="back-nav" href="/">${"<-"}</a>
         `
     }
 

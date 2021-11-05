@@ -12,7 +12,7 @@ class BackButton extends Nanocomponent {
 
     createElement() {
         return html`
-            <a class="back-nav" href="/"> ${"<-"} BACK</a>
+            <a class="back-nav" href="/">${"<-"}</a>
         `
     }
 
@@ -2634,7 +2634,7 @@ function about() {
                         About
                     </div>
                     <div class="subtitle">
-                        Internet gunslinger. 
+                        An internet gunslinger. 
                     </div>
                 </div>
 
@@ -2646,12 +2646,12 @@ function about() {
 
                 <div class="header">
                     <div class="title">Experience</div>
-                    <div class="subtitle">A brief history</div>
+                    <div class="subtitle">Escapades past and current</div>
                 </div>
                 <div>
-                    <span class="text">2019 ${"->"} Google TV </span>
+                    <span class="text">2019 ${"->"} Present - Google TV </span>
                     <br>
-                    <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
+                    <span class="text">2015 ${"->"} 2019 - RISD BFA Industrial Design</span>
                 </div>
             </div>
 
@@ -2780,9 +2780,37 @@ function hypercore() {
                         Code Snippets & Prototypes
                     </div>
                 </div>
+
                 <div>
                     <span class="text">
                         In learning about the p2p space and the design and development of distributed applications, I have built a series of small experiements to test the capabilies and better understand the Hypercore framework.
+                    </span>
+                </div>
+
+                <div>
+                    <span class="subtitle">
+                        <a href="https://www.github.com/advino/hellohypercore">Hello Hypercore <span class="nearrow"></span></a>
+                    </span>
+                    <span class="text">
+                        Implementation of the Hypercore object which is essenitally a single-writer ledger that is synced across a set of nodes on a network.
+                    </span>
+                </div>
+
+                <div>
+                    <span class="subtitle">
+                        <a href="https://www.github.com/advino/hellohyperdrive">Hello Hyperdrive <span class="nearrow"></span></a>
+                    </span>
+                    <span class="text">
+                        Syncs a single folder across a set of nodes on a network. It is basically a more vanilla version of Dat-folder.
+                    </span>
+                </div>
+
+                <div>
+                    <span class="subtitle">
+                    <a href="https://www.github.com/advino/hyperjankstate">Hello HyperJank State <span class="nearrow"></span></a>
+                    </span>
+                    <span class="text">
+                        Simple state machine crossed with the Hypercore object. A state machine's current state is synced across a set of nodes' state machines on the network.
                     </span>
                 </div>
             </div>

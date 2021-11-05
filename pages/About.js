@@ -16,7 +16,7 @@ function about() {
                         About
                     </div>
                     <div class="subtitle">
-                        Internet gunslinger. 
+                        An internet gunslinger. 
                     </div>
                 </div>
 
@@ -28,12 +28,12 @@ function about() {
 
                 <div class="header">
                     <div class="title">Experience</div>
-                    <div class="subtitle">A brief history</div>
+                    <div class="subtitle">Escapades past and current</div>
                 </div>
                 <div>
-                    <span class="text">2019 ${"->"} Google TV </span>
+                    <span class="text">2019 ${"->"} Present - Google TV </span>
                     <br>
-                    <span class="text">2015 ${"->"} 2019 RISD BFA Industrial Design</span>
+                    <span class="text">2015 ${"->"} 2019 - RISD BFA Industrial Design</span>
                 </div>
             </div>
 
