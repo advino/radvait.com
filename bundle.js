@@ -59,7 +59,7 @@ class Toolbar extends Nanocomponent {
                     C
                 </div>
                 <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
-                    CLOCK
+                    CLOCK *WIP*
                 </div>
             </div>
             </div>
