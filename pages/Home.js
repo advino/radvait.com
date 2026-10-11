@@ -1,38 +1,27 @@
-let html = require('choo/html');
-let choo = require('choo');
-let Toolbar = require('../components/Toolbar');
+import html from 'choo/html';
+import Toolbar from '../components/Toolbar.js';
 
 let toolbar = new Toolbar();
 
 function home() {
     return html`
     <div class="max">
-    <div class="header">
-        <div class="title" style="display:flex; align-items:center; gap: 12px;">
-            <span>Advait Kalakkad</span> <span class="badge">SITE WIP</span>
-        </div>
-        <div class="subtitle">
-            Designer & Technologist
-        </div>
+    <div class="quarter">
+        <span class="title"><span class="title" style="opacity: .6;">(r)</span>Advait</span>
     </div>
 
     <div class="quarter">
-        <ul>
-            <li>Selected Works</li>
-            <li>--------------</li>
-            <li><a href="/groupdraw">Groupdraw</a></li>
-            <li><a href="https://mixedsignals.studio" >Mixed Signals Studio <span class="nearrow"></span></a></li>
-            <li><a href="/hypercore">Hypercore Experiments</a></li>
-            <li><a href="/sandbox">Sandbox</a></li>
-        </ul>
-        <ul>
-            <li>Links</li>
-            <li>--------------</li>
-            <li><a href="/about">About</a></li>
-            <li><a href="https://are.na/advait-kalakkad/">Are.na <span class="nearrow"></span></a></li>
-            <li><a href="https://github.com/advino/">Github <span class="nearrow"></span></a></li>
-            <li><a href="https://read.cv/radvait">Read CV<span class="nearrow"></span></a></li>
-        </ul>
+        <span style="font-family: 'Inter'; font-weight: 300; line-height: 26px;">
+        I lead multi-modal interaction design and model behavior for Gemini's Living Room Agent.
+        <br>
+        <br>
+        I have designed and shipped 0 - 1 products for ambitious opportunties across <a href="https://blog.google/products-and-platforms/platforms/google-tv/new-gemini-features-march-2026/">Gemini</a>, <a href="https://tv.google/intl/en_us/">Android</a>, and Google Ads.
+        </span>
+
+    </div>
+
+    <div class="quarter">
+
     </div>
 
     ${toolbar.render(this.state.toolbar)}
@@ -41,5 +30,4 @@ function home() {
     `
 }
 
-
-module.exports = home;
+export default home;

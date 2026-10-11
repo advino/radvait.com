@@ -1,5 +1,5 @@
-const Nanocomponent = require('nanocomponent');
-let html = require('nanohtml');
+import Nanocomponent from 'nanocomponent';
+import html from 'nanohtml';
 
 class BackButton extends Nanocomponent {
 
@@ -18,4 +18,4 @@ class BackButton extends Nanocomponent {
     }
 }
 
-module.exports = BackButton;
+export default BackButton;

@@ -1,5 +1,5 @@
-const Nanocomponent = require('nanocomponent');
-let html = require('nanohtml');
+import Nanocomponent from 'nanocomponent';
+import html from 'nanohtml';
 
 class Toolbar extends Nanocomponent {
     constructor() {
@@ -45,4 +45,4 @@ class Toolbar extends Nanocomponent {
     }
 }
 
-module.exports = Toolbar;
+export default Toolbar;

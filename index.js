@@ -1,12 +1,10 @@
-let html = require('choo/html');
-let choo = require('choo');
+import choo from 'choo';
 
-
-let Home = require('./pages/Home.js');
-let Groupdraw = require('./pages/GroupDraw.js');
-let Hypercore = require('./pages/Hypercore.js');
-let About = require('./pages/About.js');
-let Sandbox = require('./pages/Sandbox.js');
+import Home from './pages/Home.js';
+import Groupdraw from './pages/GroupDraw.js';
+import Hypercore from './pages/Hypercore.js';
+import About from './pages/About.js';
+import Sandbox from './pages/Sandbox.js';
 
 let app = choo();
 app.use(state);

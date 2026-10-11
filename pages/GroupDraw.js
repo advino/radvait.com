@@ -1,7 +1,5 @@
-let html = require('choo/html');
-let choo = require('choo');
-
-let BackButton = require('../components/BackButton.js');
+import html from 'choo/html';
+import BackButton from '../components/BackButton.js';
 
 let backButton = new BackButton();
 
@@ -43,4 +41,4 @@ function groupdraw() {
     `
 }
 
-module.exports = groupdraw;
+export default groupdraw;
