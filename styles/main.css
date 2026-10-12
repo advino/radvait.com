@@ -54,9 +54,74 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-Extralight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-ExtralightItalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-SemiboldItalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPMori';
+    src: url('./fonts/PPMori-BlackItalic.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+:root {
+    --font-heading: 'PP Kyoto', serif;
+    --font-sans: 'PPMori', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-ui: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 * {
     box-sizing: border-box;
-    font-family: Inter, san-serif;
+}
+
+html {
+    font-size: 14px;
 }
 
 html,
@@ -69,8 +134,17 @@ body {
 }
 
 body {
-    padding: 40px;
-    transition: background-color .25s;
+    padding: 24px 20px;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color .25s, color .25s;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 40px;
+    }
 }
 
 ul {
@@ -98,7 +172,6 @@ a {
     width: 100%;
     min-height: 100%;
     height: 100%;
-
 }
 
 .full {
@@ -107,25 +180,39 @@ a {
 }
 
 .threequarter {
-    width: 75%;
+    width: 100%;
 }
 
 .half {
     display: flex;
     flex-direction: column;
     gap: 12px;
-
-    width: 50%;
-
+    width: 100%;
+    max-width: 480px;
 }
-
 
 .quarter {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    width: 100%;
+    max-width: 440px;
+}
 
-    width: 25%;
+@media (min-width: 1024px) {
+    .quarter {
+        width: 33.333%;
+        max-width: 440px;
+    }
+
+    .half {
+        width: 50%;
+        max-width: none;
+    }
+
+    .threequarter {
+        width: 75%;
+    }
 }
 
 .day {
@@ -143,35 +230,57 @@ a {
 
 .detail-page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 24px;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .detail-page {
+        flex-direction: row;
+    }
 }
 
 .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 0.43rem;
 }
 
 .title {
-    font-size: 36px;
-    font-family: 'PP Kyoto', sans-serif;
+    font-size: 2rem;
+    /* 28px */
+    line-height: 1.15;
+    font-family: var(--font-heading);
+    font-weight: 300;
+    letter-spacing: -0.01em;
     margin: 0;
 }
 
+@media (min-width: 768px) {
+    .title {
+        font-size: 2.57rem;
+        /* 36px */
+    }
+}
+
 .subtitle {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.07rem;
+    /* 15px */
+    line-height: 1.45;
     opacity: .6;
+    font-family: var(--font-sans);
 }
 
 .text {
     display: block;
-    font-size: 14px;
-    opacity: .9;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 1.14rem;
+    /* 16px */
+    line-height: 1.6;
 }
-
 
 /* Project Documentation */
 
@@ -179,11 +288,16 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    padding: 56px;
-
+    padding: 24px;
     background-color: #bfffe6;
     border-radius: 12px;
+    min-height: 280px;
+}
+
+@media (min-width: 768px) {
+    .documentation {
+        padding: 56px;
+    }
 }
 
 /* Navigation */
@@ -191,18 +305,21 @@ a {
 .back-nav {
     width: fit-content;
     height: auto;
-
-    padding: 9px 12px;
+    padding: 6px 12px;
     background-color: #e8eaed;
     border-radius: 100px;
     text-decoration: none;
-
-    font-size: 20px;
+    font-size: 1.14rem;
+    /* 16px */
+    font-family: var(--font-ui);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nearrow::before {
     content: "\2197";
-    font-family: Inter;
+    font-family: var(--font-ui);
 }
 
 .documentation-image {
@@ -261,7 +378,8 @@ a {
     height: auto;
     padding: 6px 8px;
 
-    font-size: 12px;
+    font-size: 0.86rem;
+    /* 12px */
     font-weight: 400;
     letter-spacing: .6px;
     color: #e8eaed;
@@ -288,4 +406,101 @@ a {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: 30s;
+}
+
+/* Tabs Component */
+
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.14rem;
+    width: 100%;
+}
+
+.tabs-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.57rem;
+    font-size: 1.21rem;
+    /* ~17px */
+    letter-spacing: 0.2px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.21rem;
+    /* ~17px */
+    font-family: inherit;
+    color: inherit;
+    opacity: 0.45;
+    transition: opacity 0.2s, transform 0.15s;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: transparent;
+}
+
+.tab-btn:hover {
+    opacity: 0.85;
+}
+
+.tab-btn-active {
+    opacity: 1;
+    font-weight: 600;
+    text-decoration-color: currentColor;
+}
+
+.tab-divider {
+    opacity: 0.3;
+    font-size: 1.07rem;
+    /* ~15px */
+    user-select: none;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.tab-list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.14rem;
+    font-size: 1.21rem;
+    /* ~17px */
+    line-height: 1.45;
+}
+
+.tab-list-item a {
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.15s;
+}
+
+.tab-list-item a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.tab-item-title {
+    font-weight: 500;
+}
+
+.tab-item-meta {
+    font-size: 1.07rem;
+    /* ~15px */
+    line-height: 1.35;
+    opacity: 0.6;
 }

@@ -18,6 +18,13 @@ app.route('/groupdraw', Groupdraw);
 function state(state, emitter) {
     state.toolbar = false;
     state.nightmode = false;
+    state.activeTab = 'experience';
+
+    emitter.on('setTab', tab => {
+        state.activeTab = tab;
+        emitter.emit('render');
+    });
+
     emitter.on('DOMContentLoaded', () => {
         emitter.on('toggle', data => {
             if (data == 'n') {

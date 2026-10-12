@@ -16,7 +16,7 @@ class Toolbar extends Nanocomponent {
                 <div class="tool">
                     N
                 </div>
-                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                <div style="display:flex; justify-content: center; font-size: 0.86rem; opacity: .71; font-family: Roboto Mono, monospace">
                     NIGHT
                 </div>
             </div>
@@ -24,7 +24,7 @@ class Toolbar extends Nanocomponent {
                 <div class="tool">
                     ?
                 </div>
-                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                <div style="display:flex; justify-content: center; font-size: 0.86rem; opacity: .71; font-family: Roboto Mono, monospace">
                     TOOLS
                 </div>
             </div>
@@ -32,7 +32,7 @@ class Toolbar extends Nanocomponent {
                 <div class="tool">
                     C
                 </div>
-                <div style="display:flex; justify-content: center; font-size: 12px; opacity: .71; font-family: Roboto Mono, monospace">
+                <div style="display:flex; justify-content: center; font-size: 0.86rem; opacity: .71; font-family: Roboto Mono, monospace">
                     CLOCK *WIP*
                 </div>
             </div>
