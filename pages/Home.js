@@ -1,9 +1,11 @@
 import html from 'choo/html';
 import Toolbar from '../components/Toolbar.js';
 import Tabs from '../components/Tabs.js';
+import SquidDiorama from '../components/SquidDiorama.js';
 
 let toolbar = new Toolbar();
 let tabs = new Tabs();
+let diorama = new SquidDiorama();
 
 function home(state, emit) {
     let currentTab = (state && state.activeTab) || 'experience';
@@ -36,6 +38,10 @@ function home(state, emit) {
 
     <div class="quarter">
         ${tabs.render(currentTab, setTab)}
+    </div>
+
+    <div class="quarter" style="margin-top: 12px; margin-bottom: 40px;">
+        ${diorama.render()}
     </div>
 
     ${toolbar.render(state ? state.toolbar : (this && this.state && this.state.toolbar))}
