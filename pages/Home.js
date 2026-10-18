@@ -31,7 +31,7 @@ function home(state, emit) {
         </span>
 
         <span class="text">
-        I have shipped 0 to 1 products for ambitious opportunities across Google including Gemini, Ads, and Android
+        I have shipped 0 to 1 products for foundational surfaces across Google including Gemini, Ads, and Android
         </span>
 
     </div>

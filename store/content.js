@@ -10,23 +10,20 @@ export const content = {
         {
             title: 'Google TV Monetization',
             role: "Design Lead",
-            url: '/home',
             meta: 'Lead design and launch of 3 core moentiztion verticals for Google TV',
-            external: true
+            external: false
         },
         {
             title: 'Google TV',
             role: 'Designer',
-            url: '/home',
             meta: 'Design on the core team that launch Google TV in 2020. Owned key system features and Sys UI',
-            external: true
+            external: false
         },
         {
             title: 'Google Research',
             role: 'Design Intern',
-            url: '/home',
             meta: 'Prototyped aspirational use cases for an early-stage edge-computing platform within Google Research. Leveraged HW prototyping, Python, and local inference models.',
-            external: true
+            external: false
         },
         {
             title: 'RISD BFA Industrial Design',
@@ -34,21 +31,6 @@ export const content = {
         }
     ],
     sandbox: [
-        {
-            title: 'Sandbox Index',
-            url: '/sandbox',
-            meta: 'Projects in progress & prototypes overview'
-        },
-        {
-            title: 'Groupdraw',
-            url: '/groupdraw',
-            meta: 'Simple, shared, browser drawing network'
-        },
-        {
-            title: 'Hypercore Experiments',
-            url: '/hypercore',
-            meta: 'P2P single-writer ledger & state machine tests'
-        },
         {
             title: 'Arena Blog',
             url: 'https://github.com/advino/arena-blog',

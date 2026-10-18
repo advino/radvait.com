@@ -172,6 +172,7 @@ a {
     width: 100%;
     min-height: 100%;
     height: auto;
+    padding: 48px 0;
 }
 
 .full {
@@ -415,6 +416,7 @@ a {
     flex-direction: column;
     gap: 1.14rem;
     width: 100%;
+    min-height: 480px;
 }
 
 .tabs-nav {
